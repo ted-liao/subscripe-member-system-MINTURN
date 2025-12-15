@@ -5,21 +5,14 @@
 }
 
 body {
-    /* --- 修改這裡 --- */
-    /* 0.7 代表 70% 的黑色遮罩，數值越大越黑 (0.1 ~ 0.9) */
-    background-image: 
-        linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), 
-        url('../image/bg-admin.jpg'); 
-    /* ---------------- */
-
+    /* ...其他設定... */
+    background-image: url('../image/bg-admin.jpg'); /* 換成你的後台圖檔名 */
     background-attachment: fixed;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    
-    /* 這一行可以移除了，因為漸層已經取代了它的功能 */
-    /* background-color: rgba(0, 0, 0, 0.5) !important; */
-    /* background-blend-mode: overlay; */
+    background-color: rgba(0, 0, 0, 0.2) !important; /* 後台通常遮罩深一點比較好讀字 */
+    background-blend-mode: overlay;
 }
 .container {
     max-width: 1400px; /* <-- 已拓寬 */
@@ -1512,6 +1505,7 @@ small {
     color: #aaa !important;
     border: 1px solid rgba(255, 255, 255, 0.1) !important;
 }
+
 
 
 
