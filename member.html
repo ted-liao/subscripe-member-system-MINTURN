@@ -158,22 +158,25 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"></script>
 
 <script>
-  // 初始化 AOS 進場動畫
+  // 1. 初始化 AOS 進場動畫
   AOS.init({
-    duration: 800, // 動畫時間
-    once: true,    // 只播放一次
-    offset: 50     // 觸發距離
+    duration: 800, 
+    once: true,    
+    offset: 50,
+    // 【新增】這行可以讓手機版動畫更順暢 (禁止手機版執行太複雜的翻轉，或者你可以保留它)
+    // disable: 'mobile' // 如果你想完全關閉手機版進場動畫，就把這行註解拿掉
   });
 
-  // 初始化 Vanilla-tilt 3D 效果
-  VanillaTilt.init(document.querySelectorAll(".member-tier-card"), {
-    max: 15,      // 最大傾斜角度
-    speed: 400,   // 跟隨速度
-    glare: true,  // 開啟反光
-    "max-glare": 0.5, // 反光強度
-  });
+  // 2. 【修正】初始化 Vanilla-tilt (只在電腦版啟動)
+  // 偵測螢幕寬度，大於 768px (電腦/平板橫向) 才啟用傾斜特效
+  if (window.innerWidth > 768) {
+      VanillaTilt.init(document.querySelectorAll(".member-tier-card"), {
+        max: 15,      // 最大傾斜角度
+        speed: 400,   // 跟隨速度
+        glare: true,  // 開啟反光
+        "max-glare": 0.5, // 反光強度
+      });
+  }
 </script>
-
 </body>
-
 </html>
