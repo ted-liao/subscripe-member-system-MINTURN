@@ -15,7 +15,7 @@ body {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    background-color: rgba(0, 0, 0, 0.6) !important;
+    background-color: rgba(0, 0, 0, 0.2) !important;
     background-blend-mode: overlay;
 }
 .container {
@@ -891,3 +891,4 @@ button, .btn, .btn-small, .btn-copy, .modal-close, .btn-danger, .btn-success {
         transform: none !important; /* 動畫結束後強制歸位 */
     }
 }
+
