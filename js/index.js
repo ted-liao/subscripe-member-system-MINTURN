@@ -1512,43 +1512,24 @@ async function deleteMember(username) {
 }
 
 // 【新增】控制按鈕光暈的函數
-// 【新增】控制按鈕光暈與閃電的函數 (JS 強制版)
 function togglePriorityGlow(isON, quota) {
     const btn = document.getElementById('btnJoinQueue');
     const lang = getCurrentLang();
     const trans = translations[lang];
 
-    if (!btn) {
-        console.error("找不到 #btnJoinQueue 按鈕！請檢查 HTML");
-        return;
-    }
-
-    if (isON && quota > 0) {
-        // --- 開啟優先模式 (琥珀金 + 閃電) ---
-        btn.classList.add('priority-glow');
-        
-        // 強制寫入 style 以確保顏色變換
-        btn.style.background = 'linear-gradient(135deg, #FFD700 0%, #FFA500 100%)';
-        btn.style.borderColor = '#FFD700';
-        btn.style.color = '#000'; // 黑字比較清楚
-        btn.style.boxShadow = '0 0 20px rgba(255, 215, 0, 0.6)';
-        
-        // 改變文字提示
-        // btn.innerHTML = `⚡ ${trans.queue_join_button} (優先)`; 
-    } else {
-        // --- 關閉優先模式 (恢復原狀) ---
-        btn.classList.remove('priority-glow');
-        
-        // 清除強制 style，讓它吃回原本 CSS 的設定
-        btn.style.background = '';
-        btn.style.borderColor = '';
-        btn.style.color = '';
-        btn.style.boxShadow = '';
-        
-        // 恢復文字
-        // btn.innerHTML = trans.queue_join_button;
+    if (btn) {
+        if (isON && quota > 0) {
+            btn.classList.add('priority-glow');
+            // 你也可以在這裡改變按鈕文字
+            // btn.innerHTML = `🔥 ${trans.queue_priority_join_button || '優先排隊'}`;
+        } else {
+            btn.classList.remove('priority-glow');
+            // 恢復按鈕文字
+            btn.innerHTML = `${trans.queue_join_button || '一鍵排隊'}`;
+        }
     }
 }
+
 async function toggleAdminStatus(username) {
 }
 
@@ -1583,11 +1564,12 @@ async function validateSessionUser(username, retries = 3, delay = 500) {
 async function initialize() {
     showLoading();
     try {
-        await initializeDefaultAdmin();
+        // await initializeDefaultAdmin(); // <--- 註解掉這一行！不需要每次都檢查
 
         const loggedInUsername = sessionStorage.getItem('currentUser');
         
         if (loggedInUsername) {
+            // ... (原本的驗證邏輯保持不變)
             let member = await validateSessionUser(loggedInUsername);
 
             if (member) {
@@ -1603,6 +1585,8 @@ async function initialize() {
 
         updateUserSection();
         startGlobalCountdown();
+        
+        // ... (下方的按鈕監聽器保持不變)
         
         function setupEnterListener(inputId, callback) {
             const element = document.getElementById(inputId);
