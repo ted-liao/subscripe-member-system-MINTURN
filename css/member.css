@@ -868,3 +868,26 @@ button, .btn, .btn-small, .btn-copy, .modal-close, .btn-danger, .btn-success {
 .header a h1 {
     margin-bottom: 5px; /* 保持原本間距 */
 }
+/* =========================================
+   ▼▼▼ 手機版效能優化補丁 ▼▼▼
+   ========================================= */
+@media (max-width: 768px) {
+    /* 強制移除手機版的 3D 深度與變形，避免卡住 */
+    .member-tier-card {
+        transform: none !important; /* 確保卡片是正的 */
+        will-change: auto !important; /* 釋放記憶體 */
+        perspective: none !important; /* 移除 3D 空間感 */
+    }
+
+    /* 確保內容不會因為 3D 效果而浮起來擋住視線 */
+    .member-tier-card h2, 
+    .member-tier-card p, 
+    .member-tier-card .price-section {
+        transform: none !important;
+    }
+    
+    /* 修正 AOS 在手機上可能的閃爍 */
+    [data-aos^="flip"][data-aos^="flip"].aos-animate {
+        transform: none !important; /* 動畫結束後強制歸位 */
+    }
+}
